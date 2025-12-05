@@ -8,9 +8,6 @@ import %workspace%/.bazel/bazelrc/java.bazelrc
 ### YOUR PROJECT SPECIFIC SETTINGS GO HERE ###
 # This tells Bazel how to interact with the version control system
 # Enable this with --config=release
-build:release -c opt --stamp --workspace_status_command="tools/stamp.sh"
-common:prod --define=publishToProdEcr=true
-common:release --remote_download_regex='.*_digests.txt'
 common --enable_bzlmod=true
 
 # BEGIN __INCLUDE_PROTO__
@@ -19,8 +16,6 @@ common --enable_bzlmod=true
 build --experimental_proto_descriptor_sets_include_source_info
 test --experimental_proto_descriptor_sets_include_source_info
 # END __INCLUDE_PROTO__
-
-common --define maven_version=0.0.0
 
 build --cxxopt=-std=c++17
 build --host_cxxopt=-std=c++17
@@ -36,15 +31,6 @@ build --java_language_version=21
 build --java_runtime_version=remotejdk_21
 build --tool_java_language_version=21
 build --tool_java_runtime_version=remotejdk_21
-
-# bazel remote cache
-common --remote_cache=https://bazel-external.dp.confluent.io:443
-common --macos_minimum_os=13.5.2
-common --host_macos_minimum_os=13.5.2
-
-# macOS CI configuration with Docker/Testcontainers support
-test:macos_ci --test_env=DOCKER_HOST
-test:macos_ci --test_env=TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE
 
 ### YOUR USER SPECIFIC SETTINGS GO HERE ###
 try-import %workspace%/user.bazelrc
