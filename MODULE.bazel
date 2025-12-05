@@ -1,11 +1,5 @@
 bazel_dep(name = "aspect_bazel_lib", version = "2.9.4")
 bazel_dep(name = "abseil-cpp", version = "20250127.0", repo_name = "com_google_absl")
-
-# Use an internal fork of `rules_jvm_external` due to:
-# https://confluentinc.atlassian.net/browse/DP-14496
-# https://confluentinc.atlassian.net/browse/DP-14497
-# TODO: We should set this back to the official releases once this fork that supports
-# exclusions within POM files is upstreamed and released.
 bazel_dep(name = "rules_jvm_external", version = "6.8")
 bazel_dep(name = "rules_java", version = "8.15.0")
 bazel_dep(name = "contrib_rules_jvm", version = "0.28.0")
