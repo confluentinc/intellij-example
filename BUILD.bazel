@@ -1,0 +1,11 @@
+# BEGIN __INCLUDE_PROTO__
+load("@bazel_gazelle//:def.bzl", "DEFAULT_LANGUAGES", "gazelle", "gazelle_binary")
+# END __INCLUDE_PROTO__
+
+config_setting(
+    name = "publish_to_prod_ecr",
+    define_values = {
+        "publishToProdEcr": "true",
+    },
+    visibility = ["//visibility:public"],
+)

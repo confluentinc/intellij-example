@@ -1,0 +1,30 @@
+load("@io_grpc_grpc_java//:java_grpc_library.bzl", "java_grpc_library")
+load("@rules_java//java:defs.bzl", "java_library", "java_proto_library")
+load("@rules_proto//proto:defs.bzl", "proto_library")
+
+proto_library(
+    name = "grpctest_proto",
+    srcs = ["dummyservice.proto"],
+    strip_import_prefix = "/src/main/java/protos",
+    visibility = ["//visibility:public"],
+)
+
+java_proto_library(
+    name = "grpctest_java_proto",
+    deps = [":grpctest_proto"],
+)
+
+java_grpc_library(
+    name = "grpctest_java_grpc",
+    srcs = [":grpctest_proto"],
+    deps = [":grpctest_java_proto"],
+)
+
+java_library(
+    name = "grpctest_java_library",
+    visibility = ["//:__subpackages__"],
+    exports = [
+        ":grpctest_java_grpc",
+        ":grpctest_java_proto",
+    ],
+)
