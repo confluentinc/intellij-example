@@ -10,22 +10,6 @@ import %workspace%/.bazel/bazelrc/java.bazelrc
 # Enable this with --config=release
 common --enable_bzlmod=true
 
-# BEGIN __INCLUDE_PROTO__
-# Enable source code info in proto descriptor sets for buf linting
-# https://github.com/bazelbuild/rules_proto/issues/56
-build --experimental_proto_descriptor_sets_include_source_info
-test --experimental_proto_descriptor_sets_include_source_info
-# END __INCLUDE_PROTO__
-
-build --cxxopt=-std=c++17
-build --host_cxxopt=-std=c++17
-
-# we don't want to initiate login flow to our registry (like docker login)
-# via rules_oci
-# This was causing multiple tabs to open for people simultaneously running bazel builds.
-# Force people to login via ecr-login first.
-common --repo_env=DOCKER_ECR_CACHE_ONLY=1
-
 # Override Java versions
 build --java_language_version=21
 build --java_runtime_version=remotejdk_21
