@@ -7,7 +7,7 @@ load("@rules_jvm_external//:defs.bzl", "java_export")
 java_export(
     name = "hello_world_app",
     srcs = glob(["main/**/*.java"]),
-    maven_coordinates = "io.confluent:intellij-example:$(maven_version)",
+    maven_coordinates = "io.confluent:intellij-example:0.0.0",
     visibility = ["//visibility:public"],
 )
 
