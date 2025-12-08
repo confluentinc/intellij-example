@@ -11,8 +11,6 @@ java_export(
     visibility = ["//visibility:public"],
 )
 
-# Use confluent_rules to define a test suite for java project. https://github.com/confluentinc/confluent-bazel-rules/blob/master/scala/java_junit_test_suite.bzl
-# If you have scala and java in your project, you could use jvm_junit_test_suite in https://github.com/confluentinc/confluent-bazel-rules/blob/master/scala/jvm_junit_test_suite.bzl
 java_test_suite(
     name = "hello_test_confluent_rules",
     size = "small",
