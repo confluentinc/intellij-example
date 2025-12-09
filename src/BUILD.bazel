@@ -1,0 +1,33 @@
+load("@aspect_bazel_lib//lib:tar.bzl", "tar")
+load("@contrib_rules_jvm//java:defs.bzl", "java_test_suite")
+load("@rules_java//java:defs.bzl", "java_binary")
+load("@rules_jvm_external//:defs.bzl", "java_export")
+
+# java_export extends java_library to allow maven artifacts to be uploaded.
+java_export(
+    name = "hello_world_app",
+    srcs = glob(["main/**/*.java"]),
+    maven_coordinates = "io.confluent:intellij-example:0.0.0",
+    visibility = ["//visibility:public"],
+)
+
+java_test_suite(
+    name = "hello_test_confluent_rules",
+    size = "small",
+    srcs = glob(
+        ["test/**/*.java"],
+    ),
+    runner = "junit5",
+    runtime_deps = [
+        "@maven//:org_junit_jupiter_junit_jupiter_engine",
+        "@maven//:org_junit_platform_junit_platform_launcher",
+        "@maven//:org_junit_platform_junit_platform_reporting",
+        "@maven//:org_slf4j_slf4j_api",
+        "@maven//:org_slf4j_slf4j_simple",
+    ],
+    deps = [
+        ":hello_world_app",
+        "@maven//:org_junit_jupiter_junit_jupiter_api",
+        "@maven//:org_slf4j_slf4j_api",
+    ],
+)

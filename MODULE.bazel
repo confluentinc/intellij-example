@@ -1,0 +1,39 @@
+bazel_dep(name = "aspect_bazel_lib", version = "2.9.4")
+bazel_dep(name = "rules_jvm_external", version = "6.8")
+bazel_dep(name = "rules_java", version = "8.15.0")
+bazel_dep(name = "contrib_rules_jvm", version = "0.28.0")
+
+maven = use_extension("@rules_jvm_external//:extensions.bzl", "maven")
+maven.install(
+    artifacts = [
+        "org.junit.jupiter:junit-jupiter-engine:5.11.4",
+        "org.junit.jupiter:junit-jupiter-api:5.11.4",
+        "org.junit.platform:junit-platform-launcher:1.11.4",
+        "org.junit.platform:junit-platform-reporting:1.11.4",
+        "org.apache.logging.log4j:log4j-layout-template-json:2.25.1",
+        "org.apache.logging.log4j:log4j-slf4j2-impl:2.25.1",
+        "org.slf4j:slf4j-api:2.0.16",
+        "org.slf4j:slf4j-simple:2.0.16",
+    ],
+    fail_if_repin_required = True,
+    fetch_sources = True,
+    lock_file = "//:maven_install.json",
+    repin_instructions = "REPIN=1 bazel run @maven//:pin",
+    repositories = [
+        "https://repo1.maven.org/maven2/",
+    ],
+    use_credentials_from_home_netrc_file = True,
+    version_conflict_policy = "pinned",
+)
+use_repo(
+    maven,
+    "maven",
+)
+
+bazel_dep(name = "platforms", version = "0.0.11")
+bazel_dep(name = "grpc-java", version = "1.73.0", repo_name = "io_grpc_grpc_java")
+git_override(
+    module_name = "grpc-java",
+    remote = "https://github.com/grpc/grpc-java.git",
+    tag = "v1.73.0",
+)

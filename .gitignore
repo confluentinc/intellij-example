@@ -1,0 +1,8 @@
+# bazel
+bazel-*
+.ijwb/
+.idea/
+.bazelenv
+bep_test.json
+bazel_trace_profile.json
+user.bazelrc
