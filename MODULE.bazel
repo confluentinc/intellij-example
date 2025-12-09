@@ -1,7 +1,7 @@
-bazel_dep(name = "aspect_bazel_lib", version = "2.9.4")
-bazel_dep(name = "rules_jvm_external", version = "6.8")
-bazel_dep(name = "rules_java", version = "8.15.0")
-bazel_dep(name = "contrib_rules_jvm", version = "0.28.0")
+bazel_dep(name = "aspect_bazel_lib", version = "2.22.0")
+bazel_dep(name = "rules_jvm_external", version = "6.9")
+bazel_dep(name = "rules_java", version = "8.16.1")
+bazel_dep(name = "contrib_rules_jvm", version = "0.31.1")
 
 maven = use_extension("@rules_jvm_external//:extensions.bzl", "maven")
 maven.install(
@@ -31,7 +31,7 @@ use_repo(
 )
 
 bazel_dep(name = "platforms", version = "0.0.11")
-bazel_dep(name = "grpc-java", version = "1.73.0", repo_name = "io_grpc_grpc_java")
+bazel_dep(name = "grpc-java", version = "1.75.0", repo_name = "io_grpc_grpc_java")
 git_override(
     module_name = "grpc-java",
     remote = "https://github.com/grpc/grpc-java.git",
